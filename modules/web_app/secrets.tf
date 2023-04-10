@@ -4,6 +4,10 @@ resource "google_secret_manager_secret" "db_password" {
   replication {
     automatic = true
   }
+  labels = {
+    app = var.project_slug
+    env = var.env
+  }
 }
 
 resource "google_secret_manager_secret_version" "db_password_data" {
@@ -18,10 +22,15 @@ resource "google_secret_manager_secret_iam_member" "db_secret_access" {
   depends_on = [google_secret_manager_secret.db_password]
 }
 
+// admin password
 resource "google_secret_manager_secret" "admin_password" {
   secret_id = "admin_password"
   replication {
     automatic = true
+  }
+  labels = {
+    app = var.project_slug
+    env = var.env
   }
 }
 
@@ -43,6 +52,10 @@ resource "google_secret_manager_secret" "app_key" {
   replication {
     automatic = true
   }
+  labels = {
+    app = var.project_slug
+    env = var.env
+  }
 }
 
 resource "google_secret_manager_secret_version" "app_key_data" {
@@ -62,6 +75,10 @@ resource "google_secret_manager_secret" "mail_password" {
   secret_id = "mail_password"
   replication {
     automatic = true
+  }
+  labels = {
+    app = var.project_slug
+    env = var.env
   }
 }
 
