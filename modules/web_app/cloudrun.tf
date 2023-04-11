@@ -167,6 +167,23 @@ resource "google_cloud_run_v2_service" "web_app_backend" {
   depends_on = [google_secret_manager_secret_version.db_password_data, google_secret_manager_secret_version.app_key_data, google_secret_manager_secret_version.admin_password_data]
 }
 
+data "google_iam_policy" "noauth" {
+  binding {
+    role = "roles/run.invoker"
+    members = [
+      "allUsers",
+    ]
+  }
+}
+
+resource "google_cloud_run_service_iam_policy" "noauth" {
+  location = google_cloud_run_v2_service.web_app_backend.location
+  project  = google_cloud_run_v2_service.web_app_backend.project
+  service  = google_cloud_run_v2_service.web_app_backend.name
+
+  policy_data = data.google_iam_policy.noauth.policy_data
+}
+
 resource "google_cloud_run_domain_mapping" "default" {
   location = google_cloud_run_v2_service.web_app_backend.location
   name     = var.hostname
