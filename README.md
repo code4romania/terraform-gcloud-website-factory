@@ -1,7 +1,5 @@
 # Terraform config for Website Factory
 
-Before deploying, make sure to verify the ownership of the domain used for this service here: https://search.google.com/search-console/welcome
-
 Create a new service account to be used in Terraform Cloud from here: https://console.cloud.google.com/iam-admin/serviceaccounts.  
 Required roles for the service account:
 
@@ -10,7 +8,10 @@ Required roles for the service account:
 - Secret Manager Admin
 - Compute Network Admin
 
-Generate and download the JSON keys and then used them as GOOGLE_CREDENTIALS env variable in Terraform Cloud
+Generate and download the JSON keys and then use them as a GOOGLE_CREDENTIALS env variable in Terraform Cloud
+
+Make sure to verify the ownership of the domain here: https://search.google.com/search-console/welcome
+Add the service account email generated above as the owner user in the search console.
 
 ---
 
