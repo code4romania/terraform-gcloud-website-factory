@@ -6,6 +6,10 @@ output "cloud_run_generated_url" {
   value = module.web_app.cloud_run_generated_url
 }
 
+output "cloud_run_message" {
+  value = module.web_app.cloud_run_message
+}
+
 output "cloud_run_domain_records" {
   value = module.web_app.cloud_run_domain_records
 }

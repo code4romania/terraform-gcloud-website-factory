@@ -7,7 +7,8 @@ locals {
   container = {
     app_limit_cpu    = "1000m"
     app_limit_memory = "512Mi"
-    max_scale        = 3
+    min_scale        = var.min_scale
+    max_scale        = var.max_scale
     docker_image     = "code4romania/website-factory"
   }
 

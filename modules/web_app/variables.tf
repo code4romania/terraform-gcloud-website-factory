@@ -73,6 +73,16 @@ variable "admin_email" {
   type        = string
 }
 
+variable "min_scale" {
+  description = "Min number of instances to scale (supports 0)"
+  type        = number
+}
+
+variable "max_scale" {
+  description = "Max number of instances to scale"
+  type        = number
+}
+
 variable "activate_services" {
   type = list(any)
   default = [

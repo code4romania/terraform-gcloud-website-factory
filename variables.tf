@@ -83,3 +83,15 @@ variable "admin_email" {
   description = "Email address of initial admin account"
   type        = string
 }
+
+variable "min_scale" {
+  description = "Min number of instances to scale (supports 0)"
+  type        = number
+  default     = 0
+}
+
+variable "max_scale" {
+  description = "Max number of instances to scale"
+  type        = number
+  default     = 3
+}
