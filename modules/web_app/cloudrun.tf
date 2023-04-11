@@ -161,7 +161,6 @@ resource "google_cloud_run_service" "web_app_backend" {
         "run.googleapis.com/vpc-access-egress"     = "private-ranges-only"
         "run.googleapis.com/execution-environment" = "gen2"
         "run.googleapis.com/launch-stage"          = "BETA"
-        "run.googleapis.com/vpc-access-egress"     = "private-ranges-only"
         "run.googleapis.com/vpc-access-connector"  = google_vpc_access_connector.cloudrun_vpc_serverless.name
       }
     }
@@ -178,11 +177,20 @@ resource "google_cloud_run_service" "web_app_backend" {
   depends_on = [google_secret_manager_secret_version.db_password_data, google_secret_manager_secret_version.app_key_data, google_secret_manager_secret_version.admin_password_data]
 }
 
-resource "google_cloud_run_service_iam_member" "cloudrun_all_users" {
-  service  = google_cloud_run_service.web_app_backend.name
+data "google_iam_policy" "noauth" {
+  binding {
+    role = "roles/run.invoker"
+    members = [
+      "allUsers",
+    ]
+  }
+}
+
+resource "google_cloud_run_service_iam_policy" "noauth" {
   location = google_cloud_run_service.web_app_backend.location
-  role     = "roles/run.invoker"
-  member   = "allUsers"
+  service  = google_cloud_run_service.web_app_backend.name
+
+  policy_data = data.google_iam_policy.noauth.policy_data
 }
 
 resource "google_cloud_run_domain_mapping" "default" {
