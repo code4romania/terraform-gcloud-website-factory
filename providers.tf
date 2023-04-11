@@ -1,12 +1,12 @@
-# terraform {
-#   cloud {
-#     organization = "onghub"
+terraform {
+  cloud {
+    organization = "onghub"
 
-#     workspaces {
-#       tags = [
-#         "website-factory",
-#         "gcloud"
-#       ]
-#     }
-#   }
-# }
+    workspaces {
+      tags = [
+        "website-factory",
+        "gcloud"
+      ]
+    }
+  }
+}

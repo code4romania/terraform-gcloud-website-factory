@@ -7,10 +7,11 @@ Required roles for the service account:
 - Project IAM Admin
 - Secret Manager Admin
 - Compute Network Admin
+- Cloud Run Admin
 
-Generate and download the JSON keys and then use them as a GOOGLE_CREDENTIALS env variable in Terraform Cloud
+Generate and download the JSON keys and then use them as a GOOGLE_CREDENTIALS env variable in Terraform Cloud.
 
-Make sure to verify the ownership of the domain here: https://search.google.com/search-console/welcome
+Make sure to verify the ownership of the domain here: https://search.google.com/search-console/welcome.
 Add the service account email generated above as the owner user in the search console.
 
 ---
